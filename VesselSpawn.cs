@@ -501,25 +501,32 @@ namespace VesselMover
         {
           foreach (Part p in shipConstruct.parts)
           {
-            foreach (Collider collider in p.GetComponentsInChildren<Collider>())
-            {
-              if (collider.gameObject.layer != 21 && collider.enabled)
-              {
-                lowest = Mathf.Min(lowest, collider.bounds.min.y);
-              }
-            }
-          }
-        }
+                        if (!p.isRobotic())
+                        {
+                            foreach (Collider collider in p.GetComponentsInChildren<Collider>())
+                            {
+                                if (collider.gameObject.layer != 21 && collider.enabled)
+                                {
+                                    lowest = Mathf.Min(lowest, collider.bounds.min.y);
+                                }
+                            }
+                        }
+                    }
+                }
         else
         {
-          foreach (Collider collider in vesselData.craftPart.partPrefab.GetComponentsInChildren<Collider>())
-          {
-            if (collider.gameObject.layer != 21 && collider.enabled)
-            {
-              lowest = Mathf.Min(lowest, collider.bounds.min.y);
-            }
-          }
-        }
+                    if (!vesselData.craftPart.partPrefab.isRobotic())
+                    {
+                        foreach (Collider collider in vesselData.craftPart.partPrefab.GetComponentsInChildren<Collider>())
+                        {
+                            if (collider.gameObject.layer != 21 && collider.enabled)
+                            {
+                                lowest = Mathf.Min(lowest, collider.bounds.min.y);
+                            }
+                        }
+
+                    }
+                }
 
         if (lowest == float.MaxValue)
         {

@@ -668,6 +668,7 @@ namespace VesselMover
 
         foreach (Part p in vessel.parts)
         {
+                    if (p.isRobotic()) return;
           if (p.Modules.Contains("Tailhook")) return;
           if (p.Modules.Contains("Arrestwire")) return;
           if (p.Modules.Contains("Catapult")) return;
